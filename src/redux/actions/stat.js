@@ -1,5 +1,5 @@
-const URL = 'http://localhost:5000'
-
+// const URL = 'http://localhost:5000'
+const URL = 'https://astatx.herokuapp.com'
 export const setStat = (stat) => ({
     type: 'GET_STAT',
     payload: stat

@@ -25,7 +25,7 @@ const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic
   return (
     <div className="App">
       <LineChart
-        width={800}
+        width={document.documentElement.clientWidth-50}
         height={600}
         data={props.statistic}
         margin={{
