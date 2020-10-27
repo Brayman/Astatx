@@ -5,17 +5,18 @@ import { BiMessageSquareCheck, BiMessageSquareX } from "react-icons/bi";
 
 
 function Table({data}) {
-    var sum = 0;
+    var sum = {usd: 0, byn: 0};
     data.map(arr => {
         if(arr.buy === true) {
-            sum = sum + arr.usd
+            sum.usd = sum.usd + arr.usd
+            sum.byn = sum.byn + arr.byn
         }
     })
     return (
         <div className='table'>
             <div className='row'>
                 <div className='column'>Купленно <MdAttachMoney/>
-                    {sum}
+                    {sum.usd} --- {sum.byn}
                 </div>
             </div>
             {data.map(

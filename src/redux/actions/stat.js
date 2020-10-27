@@ -1,5 +1,5 @@
-const URL = 'http://localhost:5000'
-
+// const URL = 'http://localhost:5000'
+const URL = 'https://astatx.herokuapp.com'
 export const setStat = (stat) => ({
     type: 'GET_STAT',
     payload: stat
@@ -9,7 +9,6 @@ export const addStat = (stat) => ({
     payload: stat
 });
 export const getStat = () => dispatch => {
-    console.log('dddd');
     fetch(URL+'/stat').then(( data ) => {
         console.log(data);
         return data.json()
