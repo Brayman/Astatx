@@ -24,7 +24,7 @@ function Table({data}) {
                     return (
                         <div className='row' key={i}>
                             <div className='column'>{i+1})</div>
-                            <div className='column'>{arr.date}</div>
+                            <div className='column date'>{arr.date}</div>
                             <div className='column'>{arr.increase ? <MdTrendingUp color={'#f44336'} size={'20px'}/> : <MdTrendingDown color={'#4CAF50'} size={'20px'}/>}</div>
                             <div className='column'>{arr.prorate}</div>
                             {arr.buy? <div className='column not-buy'><BiMessageSquareCheck color={'inherit'} size={'20px'}/></div> : <div className='column buy'><BiMessageSquareX color={'inherit'} size={'20px'}/></div>}
