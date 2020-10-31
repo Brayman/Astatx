@@ -1,9 +1,18 @@
 import React, {useEffect} from 'react';
 import Form from './component/Form';
+import Filter from './component/Filter';
 import Table from './component/Table';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import * as statActions  from '../src/redux/actions/stat';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useLocation
+} from "react-router-dom";
+import * as allActions  from '../src/redux/actions/stat';
 import orderBy from "lodash/orderBy";
 import './App.css';
 import {
@@ -11,19 +20,19 @@ import {
 } from 'recharts';
 
 
-const sortBy = (element, type) => {
-  
-  
+const sortBy = (element, type) => { 
   return orderBy(element, 'date', 'asc');
 }
 
 function App(props) {
+let loc = useLocation();
 useEffect(() => {
-  props.getStat()
+  props.getStat(loc.search)
 },[]);
 const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic.length-1] : {prorate: 0}
   return (
     <div className="App">
+      <Filter filterAction={props.getStat}/>
       <LineChart
         width={document.documentElement.clientWidth-50}
         height={600}
@@ -52,7 +61,7 @@ const mapState = state => ({
   statistic: sortBy(state.statistic)
 });
   const mapDispatch = dispatch => ({
-    ...bindActionCreators(statActions, dispatch)
+    ...bindActionCreators(allActions, dispatch)
     
   });
 export default connect(mapState, mapDispatch)(App);
