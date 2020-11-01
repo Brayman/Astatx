@@ -8,8 +8,9 @@ export const addStat = (stat) => ({
     type: 'ADD_STAT',
     payload: stat
 });
-export const getStat = () => dispatch => {
-    fetch(URL+'/stat').then(( data ) => {
+export const getStat = (url) => dispatch => {
+  console.log(url);
+    fetch(URL+'/stat'+url).then(( data ) => {
         console.log(data);
         return data.json()
     }).then(data => {
@@ -29,7 +30,13 @@ export const fetchStats  = (newStat) => dispatch => {
         dispatch(addStat(data))
       }); 
     }
-
+export const setFilterWeek = () => ({
+      type: 'SORT_WEEK_ASC',
+      payload: {
+          type: 'asc',
+          length: 7
+      }
+})
 const Actions = {
     getStat: () => dispatch => {
         console.log('dddd');
@@ -44,4 +51,5 @@ const Actions = {
         payload: stat
     })
 }
+
 export default Actions;
