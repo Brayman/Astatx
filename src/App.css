@@ -37,6 +37,7 @@
   flex-direction: column-reverse;
   border: solid 2px #282c34;
   margin: 10px;
+  min-width: 380px;
 }
 .row {
   display: flex;
@@ -44,6 +45,7 @@
   border-bottom: solid 2px #282c34;
   flex-direction: row;
   justify-content: space-around;
+  min-width: inherit;
 }
 .row:first-child {
   border-bottom: none;
@@ -52,7 +54,7 @@
   flex-basis: 50px;
 }
 .date {
-  flex-grow: 5;
+  flex-grow: 3;
 }
 .byn {
   flex-grow: 0;

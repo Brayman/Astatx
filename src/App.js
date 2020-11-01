@@ -1,6 +1,14 @@
 import React, {useEffect} from 'react';
 import Form from './component/Form';
 import Table from './component/Table';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as statActions  from '../src/redux/actions/stat';
@@ -22,28 +30,33 @@ useEffect(() => {
   props.getStat()
 },[]);
 const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic.length-1] : {prorate: 0}
+let match = useRouteMatch();
+console.log(match);
   return (
-    <div className="App">
-      <LineChart
-        width={document.documentElement.clientWidth-50}
-        height={600}
-        data={props.statistic}
-        margin={{
-          top: 5, right: 30, left: 20, bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="4 4" />
-        <XAxis dataKey="date"/>
-        <YAxis domain={['dataMin', 'dataMax + 0.01']}/>
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="rate" stroke="#4caf50" activeDot={{ r: 3 }} dot={{ r: 0.5 }}/>
-        <Line type="monotone" dataKey="prorate" stroke="#f03226" activeDot={{ r: 3 }} dot={{ r: 1 }} />
-        
-      </LineChart>
-      <Form action={props.fetchStats} lastRate={lastElement.prorate}/>
-      <Table data={props.statistic}/>
-    </div>
+    <Switch>
+      <Route path={'/'}>
+        <div className="App">
+          <LineChart
+            width={document.documentElement.clientWidth-50}
+            height={600}
+            data={props.statistic}
+            margin={{
+              top: 5, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="4 4" />
+            <XAxis dataKey="date"/>
+            <YAxis domain={['dataMin', 'dataMax + 0.01']}/>
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="rate" stroke="#4caf50" activeDot={{ r: 3 }} dot={{ r: 0.5 }}/>
+            <Line type="monotone" dataKey="prorate" stroke="#f03226" activeDot={{ r: 3 }} dot={{ r: 1 }} />  
+          </LineChart>
+          <Form action={props.fetchStats} lastRate={lastElement.prorate}/>
+          <Table data={props.statistic}/>
+        </div>
+      </Route>
+    </Switch> 
   );
 }
 
