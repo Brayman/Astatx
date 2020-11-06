@@ -1,17 +1,9 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    NavLink,
-    useHistory ,
-    useLocation
+    NavLink
   } from "react-router-dom";
-import { ImSortAmountAsc, ImSortAmountDesc } from "react-icons/im";
 
 function Filter(props) {
-    let match = useLocation();
-    console.log(match);
     return (
         <div className='filter'>
                 <NavLink to='/' className='button' onClick={()=>{
@@ -29,6 +21,9 @@ function Filter(props) {
                 }}>   Месяц
                 </NavLink>
                 <NavLink to='?filter=90' className='button' onClick={()=>props.filterAction('?filter=90')}>
+                    3 Месяца
+                </NavLink>
+                <NavLink to='?filter=120' className='button' onClick={()=>props.filterAction('?filter=120')}>
                     6 Месяцев
                 </NavLink>
         </div>

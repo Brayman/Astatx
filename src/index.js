@@ -1,20 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
-} from "react-router-dom";
 import store from './redux/store'
 import {
-  BrowserRouter as Router,
-  BrowserRouter,
-  Switch,
-  Route
+  BrowserRouter
 } from "react-router-dom";
 import './index.css';
 import App from './App';
@@ -24,11 +13,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <Switch>
-          <Route path={'/'}>
-            <App />
-          </Route>
-        </Switch>
+        <App/>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

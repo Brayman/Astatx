@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
-import statistic from './statistic'
-import filters from './filter'
+import statistic from './statistic';
+import user from './user';
+import appdata from './appdata';
 
 
 export default combineReducers({
     statistic,
-    filters
+    user,
+    appdata
 });

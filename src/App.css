@@ -8,8 +8,8 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .loading {
+    animation: App-logo-spin infinite 5s linear;
   }
 }
 
@@ -87,7 +87,7 @@ button {
   padding: 0.625rem 1.1875rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 .button {
   border: 1px solid transparent;
@@ -97,11 +97,21 @@ button {
   border-radius: 4px;
   background-color: #4CAF50;
   color: #ffffff;
+  text-align: center;
 }
 .filter {
   display: flex;
   margin: 10px;
   justify-content: space-around;
+}
+.loading {
+  font-size: 40px;
+  color: #F44336;
+  position: absolute;
+  width: 60px;
+  height: 50px;
+  left: 45vw;
+  top: 40vh;
 }
 @keyframes App-logo-spin {
   from {

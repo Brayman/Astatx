@@ -1,5 +1,5 @@
-// const URL = 'http://localhost:5000'
-const URL = 'https://astatx.herokuapp.com'
+const URL = 'http://localhost:5000'
+// const URL = 'https://astatx.herokuapp.com'
 export const setStat = (stat) => ({
     type: 'GET_STAT',
     payload: stat
@@ -8,6 +8,18 @@ export const addStat = (stat) => ({
     type: 'ADD_STAT',
     payload: stat
 });
+export const login = (stat) => ({
+  type: 'LOGIN',
+  payload: stat
+});
+export const load = () => ({
+  type: 'LOADING',
+  payload: true
+});
+export const loadComp = () => ({
+  type: 'LOADING_COMPLEATE',
+  payload: false
+});
 export const getStat = (url) => dispatch => {
   console.log(url);
     fetch(URL+'/stat'+url).then(( data ) => {
@@ -15,6 +27,7 @@ export const getStat = (url) => dispatch => {
         return data.json()
     }).then(data => {
       dispatch(setStat(data))
+      dispatch(loadComp())
     })
   }
 export const fetchStats  = (newStat) => dispatch => {
@@ -30,26 +43,29 @@ export const fetchStats  = (newStat) => dispatch => {
         dispatch(addStat(data))
       }); 
     }
-export const setFilterWeek = () => ({
-      type: 'SORT_WEEK_ASC',
-      payload: {
-          type: 'asc',
-          length: 7
-      }
-})
-const Actions = {
-    getStat: () => dispatch => {
-        console.log('dddd');
-        fetch(URL+'/stat').then(( data ) => {
-            console.log(data);
-            return data.json()
-            
-        }).then(data => dispatch(Actions.setStat(data)))
+export const FetchLogIn  = (post) => dispatch => {
+  fetch(URL+'/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(post)
+        }).then(res => {return res.json()})
+        .then(data => {
+          console.log(data);
+          dispatch(login(data))
+        }); 
+      }    
+export const FetchRegData  = (post) => dispatch => {
+  fetch(URL+'/auth', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
       },
-      setStat : (stat) => ({
-        type: 'GET_STAT',
-        payload: stat
-    })
-}
-
-export default Actions;
+      body: JSON.stringify(post)
+    }).then(res => {return res.json()})
+    .then(data => {
+      console.log(data);
+      dispatch(FetchLogIn(data))
+    }); 
+  }
