@@ -24,19 +24,19 @@ import {BiLoaderCircle } from "react-icons/bi";
 
 
 const sortBy = (element, type) => { 
-  return orderBy(element, 'date', 'asc');
+  return orderBy(element, 'date.default', 'asc');
 }
 
 function Home({props}) {
 let loc = useLocation();
 useEffect(() => {
-  props.getStat(loc.search)
+  props.getStat({login: props.user.profile.login, other: loc.search})
 },[]);
 const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic.length-1] : {prorate: 0}
   return (
     <div className="App">
       {props.appdata.isLoading==true ? <div className='loading'><BiLoaderCircle/></div> : null}
-      <Filter filterAction={props.getStat}/>
+      <Filter filterAction={props.getStat} login={props.user.profile.login}/>
       <LineChart
         width={document.documentElement.clientWidth-50}
         height={600}
@@ -46,7 +46,7 @@ const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic
         }}
       >
         <CartesianGrid strokeDasharray="4 4" />
-        <XAxis dataKey="date"/>
+        <XAxis dataKey="date.default"/>
         <YAxis domain={['dataMin', 'dataMax + 0.01']}/>
         <Tooltip />
         <Legend />
@@ -54,7 +54,7 @@ const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic
         <Line type="monotone" dataKey="prorate" stroke="#f03226" activeDot={{ r: 3 }} dot={{ r: 1 }} />
         
       </LineChart>
-      <Form action={props.fetchStats} lastRate={lastElement.prorate}/>
+      <Form action={props.fetchStats} user={props.user.profile} lastRate={lastElement.prorate}/>
       <Table data={props.statistic}/>
     </div>
   );
@@ -62,6 +62,8 @@ const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic
 
 function App(props) {
   let par = useParams();
+  let loc = useLocation();
+  console.log(loc, par);
   return (
     <Switch>
         <Route exact path={'/'}>

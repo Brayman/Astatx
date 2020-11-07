@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
-function Form(props) {
-    const [data, setData] = useState({date:null,
+function Form(props, user) {
+    const [data, setData] = useState({date:{},
     prorate: 0,
     buy: false,
     usd: 0,
@@ -41,7 +41,10 @@ function Form(props) {
         console.log(dateNow);
         setData({
             ...data,
-            date: dateNow
+            date: {
+                default: dateNow.getDate()+'/'+ (dateNow.getMonth()+1)+'/'+dateNow.getUTCFullYear(),
+                full: dateNow
+            }
         })
     }
     return (
@@ -53,7 +56,7 @@ function Form(props) {
             </div>
             <input type="number" disabled={!data.buy} value={data.usd} onChange={USDChange}/>
             
-            <button onClick={()=>props.action(data)}>
+            <button onClick={()=>props.action(data, props.user.login)}>
                 Отправить
             </button>
         </div>

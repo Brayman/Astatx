@@ -22,7 +22,7 @@ export const loadComp = () => ({
 });
 export const getStat = (url) => dispatch => {
   console.log(url);
-    fetch(URL+'/stat'+url).then(( data ) => {
+    fetch(URL+'/stat/'+url.login+url.other).then(( data ) => {
         console.log(data);
         return data.json()
     }).then(data => {
@@ -30,8 +30,8 @@ export const getStat = (url) => dispatch => {
       dispatch(loadComp())
     })
   }
-export const fetchStats  = (newStat) => dispatch => {
-    fetch(URL+'/stat', {
+export const fetchStats  = (newStat, login) => dispatch => {
+    fetch(URL+'/stat/'+login, {
         method: 'PUT', // *GET, POST, , DELETE, etc.
         headers: {
           'Content-Type': 'application/json'
