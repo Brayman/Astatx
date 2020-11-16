@@ -12,6 +12,10 @@ export const login = (stat) => ({
   type: 'LOGIN',
   payload: stat
 });
+export const filter = (stat) => ({
+  type: 'FILTER',
+  payload: stat
+});
 export const load = () => ({
   type: 'LOADING',
   payload: true
@@ -20,10 +24,15 @@ export const loadComp = () => ({
   type: 'LOADING_COMPLEATE',
   payload: false
 });
+const loadFail = (data) => ({
+  type: 'LOADING_FAIL',
+  payload: data
+})
 export const getStat = (url) => dispatch => {
   console.log(url);
     fetch(URL+'/stat/'+url.login+url.other).then(( data ) => {
         console.log(data);
+        dispatch(filter(url.other));
         return data.json()
     }).then(data => {
       dispatch(setStat(data))
@@ -50,10 +59,11 @@ export const FetchLogIn  = (post) => dispatch => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(post)
-        }).then(res => {return res.json()})
+        }).then(res => { return res.json()})
         .then(data => {
           console.log(data);
-          dispatch(login(data))
+          data.error === undefined ? dispatch(login(data)) : dispatch(loadFail(data))
+          
         }); 
       }    
 export const FetchRegData  = (post) => dispatch => {
