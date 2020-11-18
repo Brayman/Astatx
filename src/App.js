@@ -4,6 +4,7 @@ import Filter from './component/Filter';
 import SignIn from './component/SignIn';
 import Table from './component/Table';
 import Menu from './component/Menu';
+import Catalog from './component/Catalog';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import {
@@ -59,7 +60,7 @@ console.log(props.appdata.isLoading);
     </div>
   );
 }
-let position;
+
 function App(props) {
   let par = useParams();
   let loc = useLocation();
@@ -76,6 +77,9 @@ function App(props) {
           </Route>
           <Route exact path={'/Astatx/:login'}>
             {props.user.profile.login===par.login ? <Redirect to='/Astatx/signin'/> :  <Home props={props} />}
+          </Route>
+          <Route exact path={'/Astatx/:login/catalog'}>
+            <Catalog />
           </Route>
           <Route path='*'>
             <div>
