@@ -1,0 +1,11 @@
+.menu {
+    bottom: 0vh;
+    font-size: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    background-color: #e6e8ea;
+    color: #999999;
+    justify-content: space-around;
+}
