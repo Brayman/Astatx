@@ -1,14 +1,21 @@
 import React from 'react';
 import { BiListUl, BiUser, BiGridAlt, BiHomeAlt, BiImport, BiLogIn } from "react-icons/bi";
 import '../css/menu.css';
+import {  
+    NavLink,
+    useLocation
+} from "react-router-dom";
 
 function Menu({status}) {
+    let loc = useLocation();
     if (status) {
         return (
             <div className={`menu`}>
                 <BiHomeAlt/>
                 <BiListUl/>
-                <BiGridAlt/>
+                <NavLink to={`${loc.pathname}/catalog`}>
+                    <BiGridAlt/>
+                </NavLink>
                 <BiUser/>
             </div>
          )
@@ -16,8 +23,10 @@ function Menu({status}) {
         return (
             <div className={`menu`}>
                 <div>
-                    <BiLogIn/>
-                    Log in
+                    <NavLink to={`/Astatx/signin`}>
+                        <BiLogIn/>
+                        Log in
+                    </NavLink>
                 </div>
                 <div>
                     <BiImport/>
