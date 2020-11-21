@@ -1,3 +1,33 @@
 .wrong {
     color: #F44336;
 }
+.good {
+    color: #4CAF50;
+}
+input:focus {
+    border-bottom-color: transparent;
+    background-size: 100% 100%, 100% 100%;
+    transition-duration: 0.3s;
+    box-shadow: none;
+    background-image: linear-gradient(to top, #4CAF50 2px, rgba(70, 128, 255, 0) 2px), linear-gradient(to top, #ced4da 1px, rgba(206, 212, 218, 0) 1px);
+}
+input  {
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    background: no-repeat center bottom, center calc(100% - 1px);
+    background-size: 0 100%, 100% 100%;
+    transition: background ease-out 0s;
+    outline: none;
+    
+}
+input.secondpass.wrong:focus {
+    background-image: linear-gradient(to top, #F44336 2px, rgba(70, 128, 255, 0) 2px), linear-gradient(to top, #ced4da 1px, rgba(206, 212, 218, 0) 1px);
+}
+.signin_form{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    margin: 10vh 10vw;
+    padding: 10em 2em;
+    border-radius: 15px;
+}
