@@ -1,4 +1,17 @@
+import { toInteger } from 'lodash';
 import React, {useState} from 'react';
+import '../css/form.css';
+import { BiCheckbox, BiCheckboxChecked, BiX } from "react-icons/bi";
+
+function CheckBox({checked}) {
+    console.log(checked);
+    const [checkee, setCheck] = useState(false)
+    return (
+        <div className='checkbox'>
+            {checked ? <BiCheckboxChecked name='check' className='checkbox checked'/>: <BiCheckbox className='checkbox default'/>}
+        </div>
+    )
+}
 
 function Form(props, user) {
     const [data, setData] = useState({date:{},
@@ -7,35 +20,36 @@ function Form(props, user) {
     usd: 0,
     byn: 0
 })
-    const ProrateChange = (e) => {
-        console.log();
-        setData({
-            ...data,
-            rate: e.target.value
-        })
-    }
-    const RateChange = (e) => {
-        console.log();
-        setData({
-            ...data,
-            prorate: e.target.value,
-            increase: props.lastRate >= e.target.value ? false : true
-        })
-    }
-    const USDChange = (e) => {
-        setData({...data,
-            usd: e.target.value,
-            byn: Math.trunc(e.target.value * 100 * data.prorate) /100,
-        })
-    }
-    const BuyChange = (e) => {
-        if (e.target.checked===false) {
-            setData({...data,buy:e.target.checked, usd:0, byn:0})
-        } else {
-            setData({...data,buy:e.target.checked})
+    const FormEnter = e => {
+        console.log(e.target);
+        switch (e.target.name) {
+            case 'prorate':
+                setData({
+                    ...data,
+                    prorate: parseFloat(e.target.value)
+                })
+                break;
+            case 'rate':
+                setData({
+                    ...data,
+                    rate: parseFloat(e.target.value)
+                })
+                break;
+            case 'check':
+                setData({...data,buy:!data.buy, usd:0, byn:0})
+                
+                break;
+            case 'usd':
+                setData({
+                    ...data,
+                    usd: parseInt(e.target.value),
+                    byn: Math.trunc(e.target.value * 100 * data.prorate) /100
+                })
+            default:
+                break;
         }
-        
     }
+
     const setDate = (e) => {
         const dateNow = new Date();
         console.log(dateNow);
@@ -43,22 +57,28 @@ function Form(props, user) {
             ...data,
             date: {
                 default: dateNow.getDate()+'/'+ (dateNow.getMonth()+1)+'/'+dateNow.getUTCFullYear(),
-                full: dateNow
+                full: dateNow,
+                month: dateNow.getMonth()+1 
             }
         })
     }
     return (
-        <div className="MyForm">
-            <input type="number" onChange={RateChange} onClick={setDate}/>
-            <input type="number" onChange={ProrateChange} />
-            <div>
-                <input type="checkbox" onChange={BuyChange}/> buy?
+        <div className='blur'>
+            <div className="form">
+                <BiX className='close_button' onClick={props.close}/>
+                <input type="number" name='prorate' placeholder='prorate' onChange={FormEnter} onClick={setDate}/>
+                <input type="number" name='rate' placeholder='rate' onChange={FormEnter} />
+                
+                <div name='check' onClick={()=>{console.log('pup'); setData({...data,buy:!data.buy, usd:0, byn:0})}}>
+                    Купленно? <CheckBox checked={data.buy} /> 
+                    
+                </div>
+                <input type="number" name='usd' disabled={!data.buy} onChange={FormEnter}/>
+                
+                <button onClick={()=>props.addStat(data, props.user.login)}>
+                    Отправить
+                </button>
             </div>
-            <input type="number" disabled={!data.buy} value={data.usd} onChange={USDChange}/>
-            
-            <button onClick={()=>props.action(data, props.user.login)}>
-                Отправить
-            </button>
         </div>
     )
 }

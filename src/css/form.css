@@ -1,0 +1,49 @@
+.checkbox {
+    font-size: 30px;
+    transition: color 40s linear;
+}
+.checkbox.default {
+    transition: color 40s linear;
+    color: grey;
+}
+.checkbox.checked {
+    
+    color: #4CAF50;
+    
+}
+
+@keyframes checked {
+    0% {
+        color: grey;
+    }
+    100% {
+        color: #4CAF50;
+    }
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    margin: 10% 10%;
+    width: 80%;
+    /* height: 80%; */
+    border: solid 1px grey;
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+.close_button {
+    right: 15px;
+    position: static;
+    font-size: 20px;
+}
+.close_button:hover {
+    color: #f44336;
+}
+.blur {
+    position: fixed;
+    top: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #525252e8;
+}
