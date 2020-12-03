@@ -61,6 +61,19 @@ export const fetchStats  = (newStat, login) => dispatch => {
         dispatch(closeAddForm())
       }); 
     }
+export const newFetchStats  = (newStat, id) => dispatch => {
+      fetch(URL+'/nstat/'+id, {
+          method: 'PUT', // *GET, POST, , DELETE, etc.
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newStat)
+        }).then(res => {return res.json()})
+        .then(data => {
+          console.log(data);
+          dispatch(addStat(data))
+        }); 
+      }
 export const FetchLogIn  = (post) => dispatch => {
   fetch(URL+'/login', {
           method: 'POST',
@@ -88,3 +101,7 @@ export const FetchRegData  = (post) => dispatch => {
       dispatch(FetchLogIn(data))
     }); 
   }
+export const setStatistic = (key,payload) => ({
+  type: 'FILTER_MONTH',
+  payload: {key,payload}
+})
