@@ -1,14 +1,8 @@
-export default (state = {
-    sumBYN: 0,
-    sumUSD: 0,
-    averageProrate: 0,
-    averageCostUSD: 0,
-    averageCostBYN: 0
-
-}, {type, payload}) => {
+export default (state = {}, {type, payload}) => {
     switch (type) {
-        case 'AVERAGE_USD':            
-            return {...state, averageCostUSD: payload}
+        case 'FILTER_MONTH':
+            console.log(payload);            
+            return {...state, [payload.key]: payload.payload}
         case 'AVERAGE_BYN':            
             return {...state, averageCostBYN: payload}
         case 'SUM_USD':            

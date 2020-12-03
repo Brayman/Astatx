@@ -55,7 +55,7 @@ console.log(props.appdata.isLoading);
         <Line type="monotone" dataKey="prorate" stroke="#f03226" activeDot={{ r: 3 }} dot={{ r: 1 }} />
         
       </LineChart>
-      <Form action={props.fetchStats} user={props.user.profile} lastRate={lastElement.prorate}/>
+      <Form action={props.newFetchStats} user={props.user.profile} lastRate={lastElement.prorate}/>
       <Table data={props.statistic}/>
     </div>
   );

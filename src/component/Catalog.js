@@ -6,7 +6,7 @@ import {
     useLocation
   } from "react-router-dom";
 import last from "lodash/last";
-import orderBy from "lodash/orderBy";
+import forEach from "lodash/forEach";
 import groupBy from "lodash/groupBy";
 import * as allActions  from '../redux/actions/stat';
 import '../css/catalog.css';
@@ -24,7 +24,15 @@ function Box({data}) {
 
 function Catalog({setStatistic, statistic, alldata}) {
     const [stat, setStat] = useState({
-        
+        Dec: {
+            sumUSD: 0,
+            sumBYN: 0,
+            averageBYN: 0,
+            averageUSD: 0,
+            averageRate: 0,
+            maxRate: 0,
+            minRate: 0
+        }
     });
     let loc = useLocation();
     const dataTest = [
@@ -49,9 +57,13 @@ function Catalog({setStatistic, statistic, alldata}) {
         minRate: 2.4
         
     }]
-    const data = groupBy(alldata, 'date.month')
-    console.log(data);
-    month
+    
+    
+    const newData = alldata.reduce((acc, now, i,arr) => {
+        
+        
+       
+    },[])
     const sumBYN = alldata.reduce((acc, now, i,arr) => {
         
         return acc + now.byn
@@ -79,13 +91,15 @@ function Catalog({setStatistic, statistic, alldata}) {
        
     },0)
     useEffect(() => {
-        setStatistic('SUM_USD',sumUSD);
-        setStatistic('AVERAGE_PRORATE',sredRate);
-        setStatistic('SUM_BYN',sumBYN);
-        setStatistic('AVERAGE_USD',sredUSD)
-      },[]);
+        const data = groupBy(alldata, 'date.month')
+        const piu = forEach(data, (value, key)=>{
+            setStatistic(key, value)
+            console.log(stat[key]);
+            
+        })
+      },[alldata]);
     return dataTest.map(arg => (
-        <Box data={arg} />
+        <Box key={arg.month} data={arg} />
         )
     )
 } 
