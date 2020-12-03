@@ -1,5 +1,5 @@
-const URL = 'http://localhost:5000'
-// const URL = 'https://astatx.herokuapp.com'
+// const URL = 'http://localhost:5000'
+const URL = 'https://astatx.herokuapp.com'
 export const setStat = (stat) => ({
     type: 'GET_STAT',
     payload: stat
@@ -12,9 +12,17 @@ export const login = (stat) => ({
   type: 'LOGIN',
   payload: stat
 });
+
 export const filter = (stat) => ({
   type: 'FILTER',
   payload: stat
+});
+export const openAddForm = () => ({
+  type: 'OPEN_ADD_FORM',
+});
+export const closeAddForm = () => ({
+  type: 'CLOSE_ADD_FORM',
+
 });
 export const load = () => ({
   type: 'LOADING',
@@ -50,6 +58,7 @@ export const fetchStats  = (newStat, login) => dispatch => {
       .then(data => {
         console.log(data);
         dispatch(addStat(data))
+        dispatch(closeAddForm())
       }); 
     }
 export const FetchLogIn  = (post) => dispatch => {

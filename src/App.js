@@ -54,7 +54,7 @@ const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic
         <Line type="monotone" dataKey="prorate" stroke="#f03226" activeDot={{ r: 3 }} dot={{ r: 1 }} />
         
       </LineChart>
-      <Form action={props.fetchStats} user={props.user.profile} lastRate={lastElement.prorate}/>
+      {props.appdata.form.open ? <Form addStat={props.fetchStats} close={props.closeAddForm} user={props.user.profile} lastRate={lastElement.prorate}/> : <button className='add trans' onClick={props.openAddForm}>Добавить</button>}
       <Table data={props.statistic}/>
     </div>
   );
