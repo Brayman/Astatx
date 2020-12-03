@@ -2,12 +2,11 @@ import React, {useEffect} from 'react';
 import Form from './component/Form';
 import Filter from './component/Filter';
 import SignIn from './component/SignIn';
-import Auth from './component/Auth';
 import Table from './component/Table';
+import Menu from './component/Menu';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
@@ -23,8 +22,8 @@ import {
 import {BiLoaderCircle } from "react-icons/bi";
 
 
-const sortBy = (element, type) => { 
-  return orderBy(element, 'date.default', 'asc');
+const sortBy = (element) => { 
+  return orderBy(element, 'date.full', 'asc');
 }
 
 function Home({props}) {
@@ -33,10 +32,11 @@ useEffect(() => {
   props.getStat({login: props.user.profile.login, other: loc.search})
 },[]);
 const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic.length-1] : {prorate: 0}
+console.log(props.appdata.isLoading);
   return (
     <div className="App">
-      {props.appdata.isLoading==true ? <div className='loading'><BiLoaderCircle/></div> : null}
-      <Filter filterAction={props.getStat} login={props.user.profile.login}/>
+      {props.appdata.isLoading===true ? <div className='loading'><BiLoaderCircle/></div> : null}
+      <Filter filterAction={props.getStat} login={props.user.profile.login} status={props.appdata.filter}/>
       <LineChart
         width={document.documentElement.clientWidth-50}
         height={600}
@@ -59,28 +59,33 @@ const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic
     </div>
   );
 }
-
+let position;
 function App(props) {
   let par = useParams();
   let loc = useLocation();
   console.log(loc, par);
   return (
-    <Switch>
-        <Route exact path={'/'}>
-          {props.user.auth==false ? <Redirect to='/signin'/> :  <Home props={props} />}
-        </Route>
-        <Route exact path={'/signin'}>
-          {props.user.auth==true ? <Redirect to={`/${props.user.profile.login}`}/>:  <SignIn actions={{regAction: props.FetchRegData, loginAction: props.FetchLogIn}}/>}
-        </Route>
-        <Route exact path={'/:login'}>
-          {props.user.profile.login==par.login ? <Redirect to='/signin'/> :  <Home props={props} />}
-        </Route>
-        <Route path='*'>
-          <div>
-            not found
-          </div>
-        </Route>
-    </Switch>
+    <div className='app'>
+      <div className='content'>
+        <Switch>
+          <Route exact path={'/Astatx'}>
+            {props.user.auth===false ? <Redirect to='/Astatx/signin'/> :  <Home props={props} />}
+          </Route>
+          <Route exact path={'/Astatx/signin'}>
+            {props.user.auth===true ? <Redirect to={`/Astatx/${props.user.profile.login}`}/>:  <SignIn actions={{regAction: props.FetchRegData, loginAction: props.FetchLogIn}}/>}
+          </Route>
+          <Route exact path={'/Astatx/:login'}>
+            {props.user.profile.login===par.login ? <Redirect to='/Astatx/signin'/> :  <Home props={props} />}
+          </Route>
+          <Route path='*'>
+            <div>
+              not found
+            </div>
+          </Route>
+        </Switch>
+      </div>
+      <Menu status={props.user.auth}/>
+    </div>
   )
 }
 const mapState = state => ({
