@@ -1,9 +1,15 @@
+
 .app {
   
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   padding-bottom: 10vh;
+}
+body {
+  background-color: #282c34;
+ 
+
 }
 
 .vertical {

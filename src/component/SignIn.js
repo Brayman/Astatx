@@ -1,10 +1,17 @@
 import React, {useState} from 'react';
-import { FiXCircle } from "react-icons/fi";
+import { FiXCircle, FiCheckCircle } from "react-icons/fi";
 import '../css/SignIn.css';
 
  function password(atr) {
     if (!atr) {
         return <FiXCircle className='wrong' />
+    } else {
+        return <FiCheckCircle className='good'/>
+    }
+}
+function decorate(atr) {
+    if (!atr) {
+        return 'wrong'
     } else {
         return 'good'
     }
@@ -32,8 +39,10 @@ function SignIn({actions}) {
                 setData({...data,bank: e.target.value})
                 break;
             case 'repeatpassword':
-                if (data.password===e.target.value) {
+                if (data.password==e.target.value) {
                     setData({...data,passwordtrue: true})
+                } else {
+                    setData({...data,passwordtrue: false})
                 }
                 break;
             default:
@@ -42,15 +51,15 @@ function SignIn({actions}) {
     }
     
     return (
-        <div className='MyForm'>
+        <div className='signin_form'>
             Login
             <input type="text" name='login' onChange={EnterPass} />
             
-            Password
+            <label htmlFor='password'>Password</label>
             <input type="password"  name='password' onChange={EnterPass} />
             <div>
                 Repeat password
-                <input type="password" name='repeatpassword' onChange={EnterPass}/> {password(data.passwordtrue)}
+                <input className={'secondpass '+ decorate(data.passwordtrue)} type="password" name='repeatpassword' onBlur={EnterPass}/> {password(data.passwordtrue)}
             </div>
             
             Email
