@@ -55,5 +55,20 @@
     color: #000000;
 }
 
+.Catalog {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+.MonthCatalog {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.AllCatalog {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
 
 

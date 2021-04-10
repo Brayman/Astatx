@@ -12,6 +12,20 @@
     
 }
 
+.help {
+    border: solid white 2px;
+}
+.good.help {
+    color: #4CAF50;
+    border-color: #4CAF50;
+    background-color: #4caf5057;
+    padding: 3px;
+}
+.bad.help {
+    border-color: red;
+    background-color: red;
+}
+
 @keyframes checked {
     0% {
         color: grey;

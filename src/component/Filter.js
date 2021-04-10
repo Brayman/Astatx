@@ -15,19 +15,19 @@ function Filter({filterAction, login}) {
                 }}>
                     Все
                 </NavLink>
-                <NavLink to={`${loc.pathname}?filter=7`} className='button' onClick={()=>{
-                    filterAction({other:'?filter=7', login: login})
+                <NavLink to={`${loc.pathname}?filter=week`} className='button' onClick={()=>{
+                    filterAction({other:'?filter=week', login: login})
                 }}>
                     Неделя
                 </NavLink>
-                <NavLink to={`${loc.pathname}?filter=30`} className='button' onClick={()=>{
-                    filterAction({other:'?filter=30', login: login})
+                <NavLink to={`${loc.pathname}?filter=month`} className='button' onClick={()=>{
+                    filterAction({other:'?filter=month', login: login})
                 }}>   Месяц
                 </NavLink>
-                <NavLink to={`${loc.pathname}?filter=90`} className='button' onClick={()=>filterAction({other:'?filter=90', login: login})}>
+                <NavLink to={`${loc.pathname}?filter=3month`} className='button' onClick={()=>filterAction({other:'?filter=3month', login: login})}>
                     3 Месяца
                 </NavLink>
-                <NavLink to={`${loc.pathname}?filter=120`} className='button' onClick={()=>filterAction({other:'?filter=120', login: login})}>
+                <NavLink to={`${loc.pathname}?filter=halfyear`} className='button' onClick={()=>filterAction({other:'?filter=halfyear', login: login})}>
                     6 Месяцев
                 </NavLink>
         </div>

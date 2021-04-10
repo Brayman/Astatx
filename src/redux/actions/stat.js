@@ -1,5 +1,5 @@
-// const URL = 'http://localhost:5000'
-const URL = 'https://astatx.herokuapp.com'
+const URL = 'http://localhost:5000'
+// const URL = 'https://astatx.herokuapp.com'
 export const setStat = (stat) => ({
     type: 'GET_STAT',
     payload: stat
@@ -38,7 +38,7 @@ const loadFail = (data) => ({
 })
 export const getStat = (url) => dispatch => {
   console.log(url);
-    fetch(URL+'/stat/'+url.login+url.other).then(( data ) => {
+    fetch(URL+'/Astatx/statistic/'+url.login+url.other).then(( data ) => {
         console.log(data);
         dispatch(filter(url.other));
         return data.json()
@@ -48,7 +48,7 @@ export const getStat = (url) => dispatch => {
     })
   }
 export const fetchStats  = (newStat, login) => dispatch => {
-    fetch(URL+'/stat/'+login, {
+    fetch(URL+'/Astatx/'+login+'/addelement', {
         method: 'PUT', // *GET, POST, , DELETE, etc.
         headers: {
           'Content-Type': 'application/json'
@@ -58,6 +58,7 @@ export const fetchStats  = (newStat, login) => dispatch => {
       .then(data => {
         console.log(data);
         dispatch(addStat(data))
+        console.log('закрываем');
         dispatch(closeAddForm())
       }); 
     }
@@ -75,13 +76,14 @@ export const newFetchStats  = (newStat, id) => dispatch => {
         }); 
       }
 export const FetchLogIn  = (post) => dispatch => {
-  fetch(URL+'/login', {
+  fetch(URL+'/Astatx/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(post)
-        }).then(res => { return res.json()})
+        }).then(res => { console.log(res);
+          return res.json()})
         .then(data => {
           console.log(data);
           data.error === undefined ? dispatch(login(data)) : dispatch(loadFail(data))
@@ -101,7 +103,27 @@ export const FetchRegData  = (post) => dispatch => {
       dispatch(FetchLogIn(data))
     }); 
   }
-export const setStatistic = (key,payload) => ({
-  type: 'FILTER_MONTH',
-  payload: {key,payload}
-})
+export const getCat = (url) => dispatch => {
+    console.log(url);
+      fetch(URL+'/catalog/'+url).then(( data ) => {
+          console.log(data);
+          return data.json()
+      }).then(data => {
+        dispatch(getCatalog(data))
+      })
+    }
+    export const getCatalog = (stat) => ({
+      type: 'GET_CATALOG',
+      payload: stat
+    });
+export const getCatFull = (url) => dispatch => {
+  fetch(URL+'/catalog/alltime/'+url).then(( data ) => {
+    return data.json()
+  }).then(data => {
+    dispatch(getCatalogFull(data))
+  })
+}
+export const getCatalogFull = (stat) => ({
+  type: 'GET_CATALOG_FULL',
+  payload: stat
+});

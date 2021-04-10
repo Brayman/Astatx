@@ -17,7 +17,7 @@ function decorate(atr) {
     }
 }
 
-function SignIn({actions}) {
+function LogIn({actions}) {
     const [data, setData] = useState({
         login: '',
         password: '',
@@ -31,20 +31,6 @@ function SignIn({actions}) {
             case 'password':
                 setData({...data,password: e.target.value})
                 break;
-            case 'email':
-                console.log(e.target);
-                setData({...data,email: e.target.value})
-                break;
-            case 'bank':
-                setData({...data,bank: e.target.value})
-                break;
-            case 'repeatpassword':
-                if (data.password==e.target.value) {
-                    setData({...data,passwordtrue: true})
-                } else {
-                    setData({...data,passwordtrue: false})
-                }
-                break;
             default:
                 break;
         }
@@ -57,20 +43,12 @@ function SignIn({actions}) {
             
             <label htmlFor='password'>Password</label>
             <input type="password"  name='password' onChange={EnterPass} />
-            <div>
-                Repeat password
-                <input className={'secondpass '+ decorate(data.passwordtrue)} type="password" name='repeatpassword' onBlur={EnterPass}/> {password(data.passwordtrue)}
-            </div>
+
             
-            Email
-            <input type="email" name='email' onChange={EnterPass} />
-            Your bank
-            <input type="text" name='bank' onChange={EnterPass}/>
+                <button className='button' onClick={() => actions.loginAction(data)}>войти</button>
             
-            
-                <button className='button' onClick={() => actions.regAction(data)}>Зарегистрироваться</button>
        </div>
     )
 } 
 
-export default SignIn;
+export default LogIn;

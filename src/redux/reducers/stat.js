@@ -1,10 +1,12 @@
-export default (state = {}, {type, payload}) => {
+import orderBy from "lodash/orderBy";
+export default (state = {month: [],all: []}, {type, payload}) => {
     switch (type) {
-        case 'FILTER_MONTH':
-            console.log(payload);            
-            return {...state, [payload.key]: payload.payload}
-        case 'AVERAGE_BYN':            
-            return {...state, averageCostBYN: payload}
+        case 'GET_CATALOG':
+            console.log('norm')        
+            return {...state, month: orderBy(payload, 'date', 'asc')}
+        case 'GET_CATALOG_FULL':
+            console.log({...state, all: payload});            
+            return {...state, all: payload}
         case 'SUM_USD':            
             return {...state, sumUSD: payload}
         case 'SUM_BYN':            
