@@ -12,13 +12,14 @@ function Graph({props}) {
     let loc = useLocation();
     useEffect(() => {
       getData()
+      props.getCatFull(props.user.profile.login)
     },[props.isLoading]);
     const lastElement = props.statistic.length > 0 ? props.statistic[props.statistic.length-1] : {prorate: 0}
     console.log(props);
       return (
         <div className="App">
           {props.appdata.isLoading===true ? <div className='loading'><BiLoaderCircle/></div> : null}
-          <Filter filterAction={props.getStat} login={props.user.profile.login} status={props.appdata.filter}/>
+          <Filter filterAction={props.getStat} catAction={props.getCatFull} login={props.user.profile.login} status={props.appdata.filter}/>
           <LineChart
             width={document.documentElement.clientWidth-50}
             height={600}
