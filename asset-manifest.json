@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Astatx/static/css/main.6e1986bb.chunk.css",
-    "main.js": "/Astatx/static/js/main.a2a19edb.chunk.js",
-    "main.js.map": "/Astatx/static/js/main.a2a19edb.chunk.js.map",
+    "main.js": "/Astatx/static/js/main.22f5fbf2.chunk.js",
+    "main.js.map": "/Astatx/static/js/main.22f5fbf2.chunk.js.map",
     "runtime-main.js": "/Astatx/static/js/runtime-main.8481259a.js",
     "runtime-main.js.map": "/Astatx/static/js/runtime-main.8481259a.js.map",
     "static/js/2.955124b3.chunk.js": "/Astatx/static/js/2.955124b3.chunk.js",
     "static/js/2.955124b3.chunk.js.map": "/Astatx/static/js/2.955124b3.chunk.js.map",
     "index.html": "/Astatx/index.html",
-    "precache-manifest.6676e72a819874bf8d8d04e8b48f57f0.js": "/Astatx/precache-manifest.6676e72a819874bf8d8d04e8b48f57f0.js",
+    "precache-manifest.3e0d96079b90d56f4fdd3ae7672c4427.js": "/Astatx/precache-manifest.3e0d96079b90d56f4fdd3ae7672c4427.js",
     "service-worker.js": "/Astatx/service-worker.js",
     "static/css/main.6e1986bb.chunk.css.map": "/Astatx/static/css/main.6e1986bb.chunk.css.map",
     "static/js/2.955124b3.chunk.js.LICENSE.txt": "/Astatx/static/js/2.955124b3.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.8481259a.js",
     "static/js/2.955124b3.chunk.js",
     "static/css/main.6e1986bb.chunk.css",
-    "static/js/main.a2a19edb.chunk.js"
+    "static/js/main.22f5fbf2.chunk.js"
   ]
 }
